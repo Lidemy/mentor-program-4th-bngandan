@@ -66,7 +66,7 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 
 - **git checkout b2dfb1b**：切換到 commit ID 為 **b2dfb1b** 的版本
   _（用 git log 查詢 commit ID 複製貼上到 checkout 後方）_
-- **git checkout master**：切換回最新的狀態
+- **git checkout master**：回到 master 這個分支的最新狀態
 
 ## 要忽略的檔案（不想放入版本控制的檔案）
 
@@ -89,7 +89,9 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 # Branch 指令
 
 - **git branch -v**：顯示有哪些 Branch
-  > **顯示 master 是主要的分支，會顯示最新的 commit 的版本號**
+  > **顯示 master 是主要的分支，會顯示在 master 這個分支內最新的 commit 的版本號**
+  > master 通常是最主要的分支，但不一定會有最新的 commit。
+  > EX. 想像新開的 branch 會拿來開發其他功能、超前部署，等到確定都沒有問題的時候會再 merge 回 master，在 merge 回來之前，最新的 commit 可能在其他 branch 上。
 - **git branch new-feature**：新建一個名為 new-feature 的 Branch
   > 新建的概念會像是：
   > 將 master 複製一份命名為 new-feature，所以 new-feature 的 commit 版本編號也會與 master 一樣，只是名字不同而已
@@ -133,7 +135,10 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 
 // 開發新功能開一個新的 branch 是一個好習慣
 
-### 一般在 Git 做整合時會用到的指令（流程）：add → commit → branch → push → pull
+### 一般在 Git 做整合時會用到的指令（流程）：開新的 branch →add → commit → push → pull → merge
+
+理想開發新功能流程：
+先開一個從 master 複製的分支 **branch**，在新分支上加入檔案 **add** -> **commit** 之後，進行開發，都沒問題再 **push** 到 GitHub 發起 pull request ，GitHub merged 後 **pull** 最新版本到 local，pull 這個過程中會將 local 端的檔案更新至 GitHub 最新內容， 這過程會 **merge** 到 master，如有遇到衝突再進行修改，順利完成下載合併後，將當時複製的那個 branch 刪除。
 
 ---
 
@@ -141,9 +146,14 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 
 ## commit message 送出後發現打錯字如何修改
 
-- **git commit --amend**：進入 Vim 編輯器，修改 commit message（**:wq** 存檔退出），git log 就可看到已修改後的名稱
+- **git commit --amend**：進入 Vim 編輯器，修改 commit message（**:wq** 存檔退出），git log 就可看到已修改後的名稱，但這個方法只能**修改最後一次 commit message**
 
-如果你已經 commit 而且又 push 了，那就乖乖認命吧，這種情形下你在 local 端改的話可能會造成其他人的困擾。
+* **git rebase**：**修改更之前的 commit message**，[詳細操作流程](https://gitbook.tw/chapters/rewrite-history/change-commit-message.html)
+
+如果你已經 commit 而且又 push 了，那就乖乖認命吧，這種情形下你在 local 端改的話可能會造成其他人的困擾，如果還沒 merge 前**有個破解法**（如下）
+
+- **git push -f**：情況如果是 push 之後在 merge 之前，還可以再透過 git push -f 來強制覆蓋該 branch 上的 commit 紀錄來調整，如果 branch 切得乾淨、分工狀態理想，不一定會影響到別人的成果。
+  > 舉例來說：剛剛 push 上去了一個擁有錯誤 commit 的 branch 上去，此時可以在 local 端先 git reset HEAD^ 將打錯的 commit 或想要修改的檔案修改之後，重新 add, commit，再 git push -f 上去，強制覆蓋遠端的 branch 紀錄，如圖示：![流程](https://i.imgur.com/N0kA12L.png)
 
 **※ 最好的方法還是 push 之前先檢查一下，避免錯的東西被放到遠端。**
 
@@ -184,6 +194,12 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 - **git checkout feature**：下載 feature（我們要的 branch） 這個 branch 到 local
   ![](https://i.imgur.com/STlvySV.png)
 
+### 補充觀念：
+
+如果 feature 不是從 local 端發出的，或 feature 在 local 端之外有新的 commit，是沒有辦法直接下載的，要先 git fetch 抓到遠端 branch feature 的狀況，然後 merge 這個新狀況進我們 local 端的 branch feature，或更直接的開一個 branch feature 並 pull 下來之後，才是完整的 branch feature。
+
+對於 **git fetch** 與 **git pull** 的真實意義，可以參考這篇文章：https://gitbook.tw/chapters/github/pull-from-github.html
+
 # Git hook 用途觀念小小講解
 
 發生某事的時候通知我
@@ -210,7 +226,7 @@ Git 就是負責版本控制、解決以上問題的一個程式。
 
 - **Repository name**：輸入名稱
 - **Description**：輸入描述
-- **選擇 Public，因為 Private 要錢**
+- **選擇 Public，目前 Private 也免費**
 - **按 Create repository**：創建 repository
   ![second](https://i.imgur.com/IlGCiig.png)
 
