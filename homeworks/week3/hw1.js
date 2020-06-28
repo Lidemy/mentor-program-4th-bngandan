@@ -1,25 +1,25 @@
-var readline = require("readline");
+/* eslint linebreak-style: ["error", "windows"] */
+const readline = require('readline');
 
-var lines = [];
-var rl = readline.createInterface({
+const lines = [];
+const rl = readline.createInterface({
   input: process.stdin,
 });
 
-rl.on("line", function (line) {
+rl.on('line', (line) => {
   lines.push(line);
 });
 
-rl.on("close", function () {
-  solve(lines);
-});
-function solve(lines) {
-  var num = Number(lines[0]);
-
-  for (var i = 0; i < num; i++) {
-    let star = "";
-    for (var j = 0; j < i + 1; j++) {
-      star += "*";
+function solve(input) {
+  const num = Number(input[0]);
+  for (let i = 0; i < num; i += 1) {
+    let star = '';
+    for (let j = 0; j < i + 1; j += 1) {
+      star += '*';
     }
     console.log(star);
   }
 }
+rl.on('close', () => {
+  solve(lines);
+});
