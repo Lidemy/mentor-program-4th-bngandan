@@ -7,9 +7,14 @@ if (process.argv[2] === 'list') {
   request(
     'https://lidemy-book-store.herokuapp.com/books?_limit=20',
     (error, response, body) => {
-      const json = JSON.parse(body);
+      let json;
+      try {
+        json = JSON.parse(body);
+      } catch (e) {
+        console.log(e);
+      }
       for (let i = 0; i < json.length; i += 1) {
-        console.log(`${json[i].id}' '${json[i].name}`);
+        console.log(`${json[i].id} ${json[i].name}`);
       }
     },
   );
@@ -23,7 +28,12 @@ if (process.argv[2] === 'read') {
       if (error) {
         return console.log('抓取失敗', error);
       }
-      const json = JSON.parse(body);
+      let json;
+      try {
+        json = JSON.parse(body);
+      } catch (e) {
+        console.log(e);
+      }
       if (body === '{}') {
         return console.log('此書籍已被刪除');
       }
