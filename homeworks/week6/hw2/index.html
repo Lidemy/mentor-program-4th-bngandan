@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表單</title>
+  <link rel="stylesheet" href="normalize.css">
+  <style>
+    body{
+      background: rgba(0, 0, 0, 0.1);
+    }
+    p{
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper{
+      max-width: 645px;
+      background: #ffffff;
+      margin: 0 auto;
+      box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+      border-top: solid 6px #fad312;
+      margin-top: 10%;
+      margin-bottom: 10%;
+      padding: 64px 36px;
+      
+    }
+    .form__title{
+      margin: 0;
+      font-size:36px;
+      font-weight: bold;
+      font-family: MicrosoftJhengHei;
+    }
+    .form__desc{
+      margin-top: 35px;
+      line-height: 2em;
+      font-size: 14px;
+      
+    }
+    .form__betan{
+      font-size: 16px;
+      color: #e74149;
+      margin-top: 22px;
+    }
+    .form__input{
+      margin-top: 55px;
+    }
+    .form__input-title{
+      font-size: 20px;
+    }
+    .form__input-frame{
+      margin-top: 20px;
+    }
+    .required:after{
+      content: "*";
+      color: #e74149;
+    }
+    .radio__click{
+      margin-top: 24px;
+    }
+    .form__input-desc{
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .submit{
+      background: #fad312;
+      font-size: 15px;
+      border: 0;
+      padding: 12px 32px;
+      border-radius: 10%;
+      margin-top: 55px;
+    }
+    .dont__password{
+      margin-top: 22px;
+    }
+    footer{
+      background:#000000;
+      color: #999999;
+      text-align: center;
+      font-size: 13px;
+      padding: 24px 0;
+      border-top: solid 3px #fad312;
+    }
+    @media(max-width: 768px){
+      .wrapper{
+        max-width: 700px;
+        
+      }
+    }
+    @media(max-width: 414px){
+      .form__title{
+        font-size:  32px;
+      }
+    }
+    @media(max-width: 360px){
+      .form__title{
+        font-size:  26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form class="form">
+      <h1 class="form__title">新拖延運動報名表單</h1>
+      <p class="form__desc">
+        活動日期：2020/12/10 ~ 2020/12/11<br/>
+        活動地點：台北市大安區新生南路二段1號
+      </p>
+      <p class="form__betan">
+        * 必填
+      </p>
+<!-- 表格 -->
+      <div class="form__input">
+        <div class="form__input-title required">暱稱 </div>
+        <div class="form__input-frame"><input type="text" name="name"></div>
+      </div>
+<!-- 表格 -->
+      <div class="form__input">
+        <div class="form__input-title required">電子郵件 </div>
+        <div class="form__input-frame"><input type="email" name="name"></div>
+      </div>
+      <div class="form__input">
+        <div class="form__input-title required">手機號碼 </div>
+        <div class="form__input-frame"><input type="text" name="name"></div>
+      </div>
+
+      <div class="form__input">
+        <div class="form__input-title required">報名類型 </div>
+        <div class="form__input-click"><label><input type="radio" name="click" class="radio__click"> 躺在床上用想像力實作</label><br><label><input type="radio" name="click" class="radio__click"> 趴在地上滑手機找現成的</label></div>
+      </div>
+
+      <div class="form__input">
+        <div class="form__input-title required">怎麼知道這個活動的？ </div>
+        <div class="form__input-frame"><input type="text" name="name"></div>
+      </div>
+      <div class="form__input">
+        <div class="form__input-title">其他</div>
+        <div class="form__input-desc">對活動的一些建議</div>
+        <div class="form__input-frame"><input type="text" name="name"></div>
+      </div>
+
+      <input type="submit" class="submit">
+
+      <p class="dont__password">請勿透過表單送出您的密碼。</p>
+    </form>
+  </div>
+  <footer>
+    © 2020 © Copyright. All rights Reserved.
+  </footer>
+</body>
+</html>
