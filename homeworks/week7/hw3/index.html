@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="normalize.css">
+  <style>
+    
+    h1{
+      margin: 0;
+      padding: 0;
+      font-weight: normal;
+    }
+    .todo__block{
+      display: flex;
+      flex-direction: column;
+      max-width: 768px;
+      background-color: #fbfbd3;
+      align-items: center;
+      margin: 20px auto;
+      border:#1eaca5 3px solid
+    }
+    .todo__block h1 {
+      margin: 30px 0;
+      font-size: 70px;
+      color: #1eaca5
+    }
+    .todo__input{
+      font-size: 26px;
+      color: #1eaca5;
+      padding: 0;
+      background: none;
+      border: 0;
+      padding: 10px 8px;
+      border-bottom: 3px solid #1eaca5;
+      margin-bottom: 50px;
+    }
+    .todo__list{
+      padding: 26px;
+      text-align: left;
+      width: 94%;
+      position: relative;
+    }
+    .todo__list:hover{
+      background: white;
+
+    }
+    .checkbox{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+    .todo__list-content{
+      color: #1eaca5;
+      font-size: 26px;
+      margin: 0 0 0 10px;
+      display: inline-block;
+      font-weight: bold;
+
+    }
+    /* 加上刪除線 */
+    .to__do-finish{
+      text-decoration: line-through;
+    }
+    /* 加上透明度 */
+    .todo__list-opacity{
+      opacity: 0.4;
+    }
+    .todo__list + .todo__list{
+      margin-top: 20px;
+    }
+    .block{
+      padding: 30px;
+    }
+     /* 差差圖式 */
+    .close__button{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #1eaca5;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .closebtn::before, .closebtn::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 30px;
+        top: 50%;
+        right: 0%;
+        margin-top: -1px;
+        background: #1eaca5;
+
+    }
+    .closebtn::before {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .closebtn::after {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+  </style>
+</head>
+<body>
+  <div>
+
+
+    <form class="todo__block">
+      <h1>Todo List</h1>
+      <div class="todo">
+        <div class="todo__add">
+          <input type="text" class="todo__input" placeholder="請輸入待辦事項" size="48" >
+        </div>
+
+        <!-- 這邊是多做的，用來看新增後的樣子 -->
+        <div class="todo__list">
+          <input type="checkbox" class="checkbox"><p class="todo__list-content">早上 5 點起床上廁所</p>
+          <div class="close__button">
+            <span class="closebtn"></span>
+          </div>
+        </div>
+        <div class="todo__list">
+          <input type="checkbox" class="checkbox"><p class="todo__list-content">明天會中威力彩</p>
+          <div class="close__button">
+            <span class="closebtn"></span>
+          </div>
+        </div>
+        <div class="todo__list">
+          <input type="checkbox" class="checkbox"><p class="todo__list-content">玩 30 場跑跑卡丁車</p>
+          <div class="close__button">
+            <span class="closebtn"></span>
+          </div>
+        </div>
+        <div class="todo__list">
+          <input type="checkbox" class="checkbox"><p class="todo__list-content">晚上睡前吃雞排</p>
+          <div class="close__button">
+            <span class="closebtn"></span>
+          </div>
+        </div>
+
+
+      </div>
+
+      <footer class="block">
+        <div></div>
+      </footer>
+    </form>
+  </div>
+  <script>
+    //新增待辦事項（還有X還沒補上)
+    document.querySelector("form").addEventListener("submit",function(e) {
+      let toDoListAdd = document.querySelector(".todo__input")
+
+      if(!toDoListAdd.value){
+        e.preventDefault()
+      }else{
+        //有更快的寫法利用 ` ` 把要新增的內容包在裡面，就不需要寫那麼多行，只要新增一個 div 把內容包起來就好
+        const element = document.querySelector(".todo")
+        let addToDo = document.createElement("div")
+        addToDo.classList.add("todo__list")
+        let addToDoCheckbox = document.createElement("input")
+        addToDoCheckbox.classList.add("checkbox")
+        addToDoCheckbox.setAttribute("type","checkbox")
+        let addToDoContent = document.createElement("p")
+        addToDoContent.classList.add("todo__list-content")
+        
+        let delete__outer = document.createElement("div")
+        delete__outer.classList.add("close__button")
+        let delete__inner = document.createElement("span")
+        delete__inner.classList.add("closebtn")
+        //把值給 p
+        addToDoContent.innerText = toDoListAdd.value
+        //console.log(addToDoContent)
+        //把 span 放到 div 內
+        delete__outer.append(delete__inner)
+        //把 p 跟 checkbox 跟 X  給 div
+        //console.log(addToDo)
+
+        addToDo.append(addToDoCheckbox)
+        addToDo.append(addToDoContent)
+        addToDo.append(delete__outer)
+        // element.appendChild(addToDo) //這行是+在最後
+
+        const firstList = document.querySelector(".todo__list") //這裡是家在第一個
+        element.insertBefore(addToDo,firstList)
+
+        e.preventDefault()
+        // 把待辦事項清空
+        document.querySelector(".todo__input").value = ""
+      }
+      console.log(toDoListAdd.value)
+    });
+    
+    //點 checkbox 出現刪除線（從這邊開始做ㄅ）打溝後 ckeckbox 跟 內容 透明度降低 內容刪除線
+    document.querySelector("form").addEventListener("click",function(e) {
+      let checked = document.querySelectorAll(".checkbox")
+      const toDoOpacity = document.querySelectorAll(".todo__list")
+      const toDoFinish = document.querySelectorAll(".todo__list-content")
+      for(let i = 0 ; i < checked.length ; i++){
+        
+        if(checked[i].checked){
+          toDoOpacity[i].classList.add("todo__list-opacity")
+          toDoFinish[i].classList.add("to__do-finish")
+        }else{
+          toDoOpacity[i].classList.remove("todo__list-opacity")
+          toDoFinish[i].classList.remove("to__do-finish")
+        }
+
+      }
+    })
+
+    //點 XX 後 把 ckeckbox  跟 內容都刪除
+    document.querySelector("form").addEventListener("click",function(e) {
+
+      let closeBtnDiv = document.querySelectorAll(".close__button")
+      let closeBtnSpan = document.querySelectorAll(".closebtn")
+      const ddd = document.querySelector(".todo")
+      const deleteList = document.querySelectorAll(".todo__list")
+
+      for(let i = 0 ; i < closeBtnDiv.length ; i++) {
+        if(e.target == closeBtnDiv[i] || e.target == closeBtnSpan[i]){
+          ddd.removeChild(deleteList[i])
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>
