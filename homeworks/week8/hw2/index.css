@@ -1,0 +1,159 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h1{
+  margin: 0;
+}
+h2{
+  margin:0;
+}
+.navbar .wrap{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 64px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  z-index: 2;
+  background: white;
+  position: fixed;
+}
+.navbar__title{
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.navbar__list{
+  list-style: none;
+  display: flex;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+.navbar__list li{
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 23px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+.navbar__list li:hover{
+  background: #4e4c4e;
+  color: white;
+}
+/* 以上 nav */
+.section__twitch{
+  background: url(bg.jpg)center/cover no-repeat;
+  position: relative;
+  z-index: 1;
+}
+.twitch__block{
+  text-align: center;
+  padding-top: 36px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.twitch__block-title{
+  font-weight: bold;
+  font-size: 32px;
+  margin: 60px 0 26px;
+}
+.twitch__block-subtitle{
+  font-size: 24px;
+}
+.twitch__block-content{
+  margin-top: 36px;
+  display: flex;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.twitch__block-link{
+  text-decoration: none;
+  color: white;
+}
+.twitch__block-board{
+  width: 360px;
+}
+.twitch__block-board:hover{
+  transform: scale(1.07);
+  cursor: pointer;
+}
+.twitch__block-block{
+  margin: 6px;
+}
+.twitch__block-board-img{
+  width: 100%;
+  margin: 0;
+  vertical-align: top;
+}
+.twitch__block-info{
+  background: #393a3c;
+  width: 348px;
+  height:100px;
+  display: flex;
+}
+.twitch__block-info-icon{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink:0;
+  margin: auto 0;
+  margin-left: 10px;
+}
+.twitch__block-info-icon img{
+  width: 100%;
+  
+}
+.twitch__block-info-detail{
+ text-align: left; 
+ width: 70%;
+ margin: auto 0;
+}
+.twitch__block-info-detail h1{
+  font-size: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  margin: 20px 12px;
+}
+.twitch__block-info-detail h3{
+  font-size: 12px;
+  margin: 20px 12px;
+}
+/* 空白填充 */
+.empty{
+  width: 360px;
+}
+
+.footer div{
+  text-align: center;
+  background: #4e4c4e;
+  padding: 14px 0;
+  color: white;
+  
+}
+@media(max-width: 912px){
+  .navbar .wrap{
+    height: 180px;
+    flex-direction: column;
+  }
+  .navbar__list{
+    flex-direction: column;
+    text-align: center;
+  }
+  .navbar__list li{
+    padding: 0;
+    padding: 5px 60px;
+    cursor: pointer;
+  }
+  .twitch__block-title{
+    margin: 176px 0 26px;
+  }
+}

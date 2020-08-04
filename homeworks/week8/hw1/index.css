@@ -1,0 +1,266 @@
+* {
+  box-sizing: border-box;
+}
+h2{
+  margin: 0;
+}
+.navbar .wrapper{
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 84px;
+  background: white;
+  padding: 0 12px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+.wrapper{
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+/* max-width 老師設定 1280 */
+.navbar__site-name{
+  color: #489846;
+  font-size: 36px;
+  font-family: Questrial;
+}
+.navbar__list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-size: 18px;
+}
+.navbar__list li {
+  margin-left: 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.navbar__list li.active, .navbar__list li:hover{
+  background: #ff7286;
+}
+
+.navbar__list li.active a,
+.navbar__list li:hover a{
+  color: white;
+}
+.navbar__list li a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 12px 24px;
+  font-family: MicrosoftJhengHei;
+}
+.section-lottery{
+  position: relative;
+  background: url(games-bn.png) center/cover no-repeat;
+  height: 767px;
+  /* max-width: 1920px; */
+}
+/* 中獎 */
+.section-lottery.first-prize{
+  background-image: url(first.jpg);
+}
+.section-lottery.second-prize{
+  background-image: url(second.jpg);
+}
+.section-lottery.third-prize{
+  background-image: url(third.jpg);
+}
+.section-lottery.none-prize{
+  background:black;
+  color: white;
+}
+/* 中獎 */
+.section-lottery:after{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.lottery__block{
+  display: inline-block;
+  background: #ffffff;
+  border-radius: 16px;
+  width: 500px;
+  height: 560px;
+  position: relative;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.lottery__block-block{
+  padding: 40px 20px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 開幹 */
+.lottery__block-title{
+  color: #5ec1b6;
+  font-family: MicrosoftJhengHei;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.lottery__block-info{
+  display: flex;
+  text-align: flex-start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px #cdcdcd dotted;
+}
+.lottery__block-subtitle{
+  color: #322929;
+  font-family: MicrosoftJhengHei;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.5em;
+}
+.lottery__block-detail{
+  color: #322929;
+  font-family: MicrosoftJhengHei;
+  font-size: 16px;
+  display: inline-block;
+  flex: 1;
+  margin-left: 20px;
+  width: 320px;
+  line-height: 1.6em;
+}
+.lottery__block-btn{
+  color: #ffffff;
+  background: #e62a45;
+  padding: 18px 160px;
+  display: inline-block;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin: 36px auto 24px;
+}
+/* 幹起來 */
+
+/* 中獎 */
+.hide{
+  display: none;
+}
+.lottery__result{
+  color: #292222;
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+.lottery__result-title{
+  color:white;
+  font-size: 36px;
+  font-family: MicrosoftJhengHei;
+}
+.lottery__result-btn{
+  color: #ffffff;
+  background: #e62a45;
+  padding: 18px 160px;
+  display: inline-block;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin: 55px auto 24px;
+
+}
+/* 中獎 */
+.footer__bottom{
+  background-color: #35564b;
+  padding: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+}
+.footer__top{
+  background: #e8efee;
+  padding: 32px 0;
+  color: #484848;
+}
+
+.footer__top .wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+.footer__site{
+  font-size: 36px;
+  color: #489846;
+}
+.footer__info{
+  margin-right: 16px;
+}
+.footer__info div + div{
+  margin-top: 10px;
+}
+
+@media(max-width: 768px){
+  .navbar .wrapper{
+    height: 120px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+  .navbar__site-name{
+    margin-top: 16px;
+  }
+  .navbar__list{
+    display: flex;
+    width: 100%;
+  }
+  .navbar__list li {
+    flex: 1;
+    margin-left: 0;
+    border-radius: 0;
+    text-align: center;
+  }
+
+  .footer__top .wrapper{
+    flex-direction: column-reverse;
+    margin: 16px  0;
+    text-align: center;
+  }
+  .footer__bom{
+    margin-bottom: 30px;
+  }
+
+  /* 
+  
+  */
+  /* .section-lottery{
+    background: none;
+  }
+  .lottery__block{
+    top: 0;
+    left: 0;
+    transform: none;
+    margin-top: 150px;
+  } */
+}
+@media(max-width: 400px){
+.lottery__result-btn{
+  width: 400px;
+}
+}
+@media(max-width: 320px){
+  /* .navbar .wrapper{
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  } */
+  .navbar__list li a {
+    padding: 6px 16px;
+  }
+}
