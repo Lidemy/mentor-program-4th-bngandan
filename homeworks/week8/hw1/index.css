@@ -88,7 +88,7 @@ h2{
   display: inline-block;
   background: #ffffff;
   border-radius: 16px;
-  width: 500px;
+  max-width: 500px;
   height: 560px;
   position: relative;
   z-index: 2;
@@ -100,9 +100,8 @@ h2{
   padding: 40px 20px 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
-/* 開幹 */
 .lottery__block-title{
   color: #5ec1b6;
   font-family: MicrosoftJhengHei;
@@ -112,7 +111,6 @@ h2{
 }
 .lottery__block-info{
   display: flex;
-  text-align: flex-start;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px #cdcdcd dotted;
@@ -132,7 +130,7 @@ h2{
   display: inline-block;
   flex: 1;
   margin-left: 20px;
-  width: 320px;
+  max-width: 320px;
   line-height: 1.6em;
 }
 .lottery__block-btn{
@@ -145,8 +143,6 @@ h2{
   text-align: center;
   margin: 36px auto 24px;
 }
-/* 幹起來 */
-
 /* 中獎 */
 .hide{
   display: none;
@@ -236,31 +232,47 @@ h2{
     margin-bottom: 30px;
   }
 
-  /* 
-  
-  */
-  /* .section-lottery{
-    background: none;
+}
+@media(max-width: 462px){
+  .lottery__result-btn{
+    max-width: 350px;
+    padding: 18px 130px;
+    margin: 20px auto 10px;
+  }
+  .lottery__block-btn{
+    max-width: 350px;
+    padding: 18px 130px;
+    margin: 20px auto 10px;
   }
   .lottery__block{
-    top: 0;
-    left: 0;
-    transform: none;
-    margin-top: 150px;
-  } */
+    height: 620px;
+    margin-top: 46px;
+  }
 }
-@media(max-width: 400px){
-.lottery__result-btn{
-  width: 400px;
-}
-}
-@media(max-width: 320px){
-  /* .navbar .wrapper{
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-  } */
+@media(max-width: 375px){
   .navbar__list li a {
     padding: 6px 16px;
+  }
+  .lottery__result-btn{
+    padding: 18px 100px;
+  }
+  .lottery__block-btn{
+    padding: 18px 100px;
+  }
+  .lottery__block{
+    height: 660px;
+    margin-top: 66px;
+  } 
+}
+@media(max-width: 320px){
+  .lottery__block{
+    height: 720px;
+    margin-top: 66px;
+  }
+}
+@media(max-width: 280px){
+  .lottery__block{
+    height: 860px;
+    margin-top: 66px;
   }
 }
