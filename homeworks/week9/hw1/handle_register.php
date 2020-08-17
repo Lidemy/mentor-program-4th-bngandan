@@ -10,7 +10,7 @@
   $username = $_POST["username"];
   $password = $_POST["password"];
 
-  $sql = sprintf("INSERT INTO `user`(`nickname`, `username`, `password`) VALUES ('%s', '%s', '%s')",$nickname, $username, $password);
+  $sql = sprintf("INSERT INTO `bngandan_users`(`nickname`, `username`, `password`) VALUES ('%s', '%s', '%s')",$nickname, $username, $password);
 
   $result = $conn->query($sql);
   if(!$result){

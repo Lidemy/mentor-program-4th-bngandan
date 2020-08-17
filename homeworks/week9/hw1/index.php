@@ -10,7 +10,7 @@
 
   }
 
-  $result = $conn->query("select * from comment order by id desc");
+  $result = $conn->query("select * from bngandan_comments order by id desc");
   if(!$result){
     die("Error:" . $conn->error);
   }

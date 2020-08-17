@@ -13,7 +13,7 @@
 
   $content = $_POST["content"];
 
-  $sql = sprintf("insert into comment(nickname, content) values('%s', '%s')",$nickname, $content);
+  $sql = sprintf("insert into bngandan_comments(nickname, content) values('%s', '%s')",$nickname, $content);
 
   $result = $conn->query($sql);
   if(!$result){
