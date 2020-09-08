@@ -1,0 +1,179 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #c2c2c2;
+}
+
+.warning{
+  background: #ffc4c6;
+  color: #a20606;
+  padding: 10px;
+  text-align: center;
+}
+
+.warning strong{
+  background: #ffc4c6;
+}
+
+.board{
+  background: white;
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 10px 30px;
+  box-shadow: 1px 1px 3px #e8e8e8;
+  border-radius: 5px;
+}
+
+.board__btn{
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border: 1px solid #c2dffb;
+  border-radius: 5px;
+  font-size: 16px;
+  display: inline-block;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.board__nickname-form{
+  margin-top: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.board__btn ~ .board__btn{
+  margin-left: 10px;
+}
+
+.board__nickname {
+  margin-top: 30px;
+}
+
+.board__title {
+  margin-top: 10px;
+}
+
+.board__new-comment-form textarea{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c2dffb;
+  box-sizing: border-box;
+  margin-top: 12px;
+}
+
+.board__submit-btn {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border: 1px solid #c2dffb;
+  border-radius: 5px;
+  background: white;
+  font-size: 16px;
+}
+
+.board__register{
+  margin: 10px;
+}
+
+.board__register input{
+  border: 1px solid #c2dffb;
+  padding: 5px;
+}
+
+.error {
+  margin-top: 10px;
+  color: #a20606;
+}
+
+.divider {
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.2);
+}
+
+.card {
+  display: flex;
+  min-height: 70px;
+  margin: 20px 0;
+}
+
+.card__avatar {
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  background: #828ed6;
+  border-radius: 50%;
+}
+
+.card__body {
+  margin-left: 16px;
+  background: #f3f3f3;
+  padding: 10px;
+  width: 84%;
+  border-radius: 5px;
+}
+
+.card__nickname{
+  color: #42a4ff;
+  font-size: 20px;
+  font-weight: bold;
+  width: 90%;
+  text-overflow : ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  /* overflow: scroll; */
+}
+
+.card__username{
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow : ellipsis;
+  font-size: 15px;
+  color: #5f76a0d8;
+  margin-top: 6px;
+}
+
+.card__time {
+  color: rgba(163, 163, 163, 0.774);
+  margin-top: 10px;
+  text-align: left;
+}
+
+.card__content {
+  margin-top: 8px;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.card__info a{
+  text-decoration: none;
+  color: #ca8080;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+
+.page__info{
+  text-align: center;
+}
+
+.paginator{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.paginator a{
+  text-decoration: none;
+  color: #5c9edc;
+  border: 1px solid #5c9edc;
+  padding: 10px;
+}
