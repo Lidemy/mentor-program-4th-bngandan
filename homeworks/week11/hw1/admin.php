@@ -55,11 +55,13 @@
         <td><?php echo escape($row["nickname"]) ?></td>
         <td><?php echo escape($row["username"]) ?></td>
         <td>
+        <?php if(!($row["username"] == "admin")) {?>
           <a href="handle_update_role.php?role=ADMIN&id=<?php echo escape($row["id"]) ?>">管理員</a>
           <a href="handle_update_role.php?role=NORMAL&id=<?php echo escape($row["id"]) ?>">使用者</a>
           <a href="handle_update_role.php?role=BANNED&id=<?php echo escape($row["id"]) ?>">停權</a>
+        <?php } ?>
         </td>
-      </tr>
+      </tr> 
     <?php } ?>
     </table>
       
