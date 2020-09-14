@@ -89,8 +89,9 @@
     const searchParams = new URLSearchParams(window.location.search);
     const todoId = searchParams.get("id")
     
+    
     if(todoId) {
-      $.getJSON("http://localhost/week12/hw2/get_todo.php?id=" + todoId, function(data){
+      $.getJSON("http://mentor-program.co/mtr04group5/bngandan/week12/hw2/get_todo.php?id=" + todoId, function(data){
         const todos = JSON.parse(data.data.todo)
         restoreTodos(todos)
       })
@@ -194,7 +195,7 @@
       const data = JSON.stringify(todos);
       $.ajax({
         type: "POST",
-        url: "http://localhost/week12/hw2/add_todo.php",
+        url: "http://mentor-program.co/mtr04group5/bngandan/week12/hw2/add_todo.php",
         data: {
           todo: data
         },

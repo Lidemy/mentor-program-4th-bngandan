@@ -17,7 +17,7 @@
   $id = intval($_GET["id"]);
 
 
-  $sql = "SELECT id, todo from todos WHERE id = ? ";
+  $sql = "SELECT id, todo from bngandan_todos WHERE id = ? ";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $id);
   

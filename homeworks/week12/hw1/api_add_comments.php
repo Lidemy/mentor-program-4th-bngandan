@@ -18,7 +18,7 @@
   $site_key = $_POST["site_key"];
   $content = $_POST["content"];
 
-  $sql = "INSERT INTO discussions(site_key, nickname, content) VALUES (?, ?, ?)";
+  $sql = "INSERT INTO bngandan_discussions(site_key, nickname, content) VALUES (?, ?, ?)";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("sss", $site_key, $nickname, $content);
   $result = $stmt->execute();

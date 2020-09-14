@@ -17,7 +17,7 @@
   $todo = $_POST["todo"];
 
 
-  $sql = "INSERT INTO todos(todo) VALUES (?)";
+  $sql = "INSERT INTO bngandan_todos(todo) VALUES (?)";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $todo);
   $result = $stmt->execute();
