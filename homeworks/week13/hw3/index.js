@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then((response) => {
       return response.json();
     }).then((json) => {
-      console.log(json);
       cb(json);
     });
   }
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }).then((response) => {
       return response.json();
     }).then((json) => {
-      console.log(json);
       cb(json);
     });
   }
