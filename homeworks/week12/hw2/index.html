@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>Todo List</title>
+
+  <style>
+    input[type=checkbox]:checked ~ input {
+      text-decoration: line-through;
+      color: rgba(0,0,0,0.3);
+    }
+
+    .options div, .clear-all {
+      cursor: pointer;
+      border-radius: 6px;
+      padding: 4px;
+      border: 2px solid transparent;
+    }
+
+    .options div.active {
+      border-color: rgba(255, 0, 0, 0.3);
+    }
+
+    .options div:hover {
+      border-color: rgba(255, 0, 0, 0.5);
+    }
+
+    .todo {
+      display: flex;
+    }
+
+    .todo__content-wrapper {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="row text-center justify-content-center todo-header">Todo List</h1>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="input-group mb-3">
+          <input type="text" class="input-todo form-control" placeholder="todo">
+          <div class="input-group-append">
+            <button class="btn btn-add btn-outline-secondary" type="button">新增</button>
+          </div>
+        </div>
+
+        <div class="todos list-group"></div>
+
+        <div class="info mt-1 d-flex justify-content-between align-items-center">
+          <div><span class="uncomplete-count">0</span> 個未完成</div>
+          <div class="options d-flex">
+            <div class="active" data-filter="all">全部</div>
+            <div class="ml-2" data-filter="uncomplete">未完成</div>
+            <div class="ml-2" data-filter="done">已完成</div>
+          </div>
+          <div class="clear-all">移除已完成待辦事項</div>
+        </div>
+
+        <button type="button" class="btn btn-save btn-primary">儲存</button>
+
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let id = 1;
+    let allTodo = 0;
+    let unCompleteTodo = 0;
+    const template = `
+      <div class="todo list-group-item list-group-item-action justify-content-between align-items-center {todoClass}">
+        <div class="todo__content-wrapper custom-control custom-checkbox align-items-center">
+          <input type="checkbox" class="check-todo " id="todo-{id}">
+          <input type="text" class="todo__content form-control ml-4 " name="todo" value="{content}">
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-delete btn-danger">刪除</button>
+        </div>
+      </div>
+    `
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const todoId = searchParams.get("id")
+    
+    
+    if(todoId) {
+      $.getJSON("http://mentor-program.co/mtr04group5/bngandan/week12/hw2/get_todo.php?id=" + todoId, function(data){
+        const todos = JSON.parse(data.data.todo)
+        restoreTodos(todos)
+      })
+    }
+
+    function restoreTodos(todos) {
+      if(todos.length === 0) return
+      id = todos[todos.length - 1].id + 1
+      for(let i = 0; i < todos.length; i += 1){
+        const todo = todos[i]
+        $(".todos").append(
+          template.replace("{content}", escapeHtml(todo.contnet))
+          .replace(/{id}/g, todo.id)
+          .replace("{todoClass}", todo.isDone ? "checked" : "")
+        )
+        allTodo += 1;
+        if(todo.isDone) {
+          $("#todo-" + todo.id).prop("checked", true);
+        }
+        if(!todo.isDone) {
+          unCompleteTodo += 1;
+        }
+      }
+      updateTodoCounter();
+    }
+
+    // 點新增按鈕 新增 todo
+    $(".btn-add").click(() => {
+      addTodo();
+    })
+
+    // 按下 Enter 可以新增 todo
+    $(".input-todo").keydown((e) => {
+      if(e.key === "Enter"){
+        addTodo()
+      }
+    })
+
+    // 刪除 todo
+    $(".todos").on("click", ".btn-delete", (e)=> {
+      $(e.target).parent().parent().remove()
+      allTodo -= 1;
+      const isChecked = $(e.target).parent().parent().find(".check-todo").is(":checked");
+      if(!isChecked){
+        unCompleteTodo -= 1;
+      }
+      updateTodoCounter();
+    })
+
+    //完成、未完成檢查打勾 ， isChecked : true=有打勾
+    $(".todos").on("change", ".check-todo", (e)=> {
+      const target = $(e.target);
+      const isChecked = target.is(":checked")
+      if(isChecked) { 
+        unCompleteTodo -= 1;
+        target.parents(".todo").addClass("checked");
+      }else {
+        unCompleteTodo += 1;
+        target.parents(".todo").removeClass("checked");
+      }
+      updateTodoCounter();
+    })
+
+    // 顯示 全部、未完成、已完成
+    $(".options").on("click", "div", (e) => {
+      const target = $(e.target)
+      const filter = target.attr("data-filter")
+      $(".options div.active").removeClass("active")
+      target.addClass("active")
+      if(filter === "all") {
+        $(".todo").show();
+      }else if(filter === "uncomplete"){
+        $(".todo").show();
+        $(".todo.checked").hide();
+      }else{// done
+        $(".todo").hide();
+        $(".todo.checked").show();
+      }
+    })
+
+    // 移除已完成待辦事項
+    $(".clear-all").click(() => {
+      allTodo -= $(".todo.checked").length;
+      $(".todo.checked").remove();
+    })
+
+    // 儲存 todo 資料
+    $(".btn-save").click(() => {
+      let todos = [];
+      // check id content
+      $(".todo").each((i, element) => {
+        const input = $(element).find(".check-todo") // checked
+        const label = $(element).find(".todo__content") // content
+        todos.push({
+          id: input.attr("id").replace("todo-", ""),
+          contnet: label.val(),
+          isDone: $(element).hasClass("checked")
+        })
+      })
+      console.log(todos)
+      const data = JSON.stringify(todos);
+      $.ajax({
+        type: "POST",
+        url: "http://mentor-program.co/mtr04group5/bngandan/week12/hw2/add_todo.php",
+        data: {
+          todo: data
+        },
+        success: function(res) {
+          const respId = res.id
+          window.location = "index.html?id=" + respId;
+        },
+        error: function() {
+          alert("Error QQ")
+        }
+      })
+
+    })
+
+    // 更新目前未完成的 Todo
+    function updateTodoCounter(){
+      $(".uncomplete-count").text(unCompleteTodo)
+    }
+
+    // 新增 todo
+    function addTodo() {
+      const value =  $(".input-todo").val();
+      if(!value) return
+      $(".todos").append(
+        template.replace("{content}", escapeHtml(value))
+        .replace(/{id}/g, id)
+      )
+      id += 1;
+      allTodo += 1;
+      unCompleteTodo += 1;
+      $(".input-todo").val("");
+      updateTodoCounter();
+    }
+
+    function escapeHtml(unsafe) {
+      return unsafe
+           .replace(/&/g, "&amp;")
+           .replace(/</g, "&lt;")
+           .replace(/>/g, "&gt;")
+           .replace(/"/g, "&quot;")
+           .replace(/'/g, "&#039;");
+    }
+
+  </script>
+</body>
+</html>
